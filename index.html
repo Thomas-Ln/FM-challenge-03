@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,500,600,700">
+  <title>Frontend Mentor | Base Apparel coming soon page</title>
+  <style>
+  /* ---- General ---- */
+
+  :root {
+    font-family: "Josefin Sans";
+    font-size: 12px;
+    --desaturatedRed: hsl(0, 36%, 70%);
+    --softRed: hsl(0, 93%, 68%);
+    --darkGrayishRed: hsl(0, 6%, 24%);
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+  }
+
+  /*--- Media Queries ---*/
+
+  @media screen and (max-width: 800px) {
+    .logo {
+      width: 10rem !important;
+      margin: 2.5rem !important;
+    }
+
+    .hero-big {
+      display:none !important;
+    }
+
+    .hero-mobile {
+      display: block !important;
+      margin: 0 auto 3rem auto;
+    }
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      width: 100% !important;
+      padding: 0 !important;
+    }
+
+    .title {
+      font-size: 4rem !important;
+    }
+
+    .title,
+    .subtitle {
+      margin: 0 auto;
+    }
+
+    [name=contact] {
+      display: flex;
+      justify-content: center;
+      margin-left: 4rem;
+    }
+
+    footer {
+      margin: auto;
+    }
+  }
+
+  /*---- Layout ----*/
+
+  main {
+    display: flex;
+    height: 100%;
+  }
+
+
+  aside {
+    width: 50%;
+    padding: 5rem 10rem 5rem 14rem;
+    background-image: url('images/bg-pattern-desktop.svg');
+    background-size: 105% 100%;
+    background-repeat: no-repeat;
+    background-color: white;
+  }
+
+  .logo {
+    width: 15rem;
+    margin-bottom: 4rem;
+  }
+
+  .hero-mobile {
+    display: none;
+  }
+
+  .title {
+    margin-bottom: 0;
+    font-size: 6rem;
+    font-weight: 500;
+    letter-spacing: 1rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .title span {
+    font-weight: 300;
+    color: var(--softRed);
+  }
+
+  .subtitle {
+    color: var(--softRed);
+    font-weight: 400;
+    line-height: 2;
+    width: 75%;
+  }
+
+  [name=contact] {
+    margin-top: 4rem;
+  }
+
+  .hero-big {
+    width: 60%;
+    float: right;
+    object-fit: cover;
+  }
+
+  /*---- Contact Form ----*/
+
+  [name=contact] {
+    position: relative;
+  }
+
+  .invalid::after {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 0;
+    font-size: 1.4rem;
+    content: "Please provide a valid email";
+    color: var(--softRed);
+  }
+
+  [name=email],
+  [type=submit] {
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+    font-size: 18px;
+    border-radius: 25px;
+  }
+
+  [name=email] {
+    width: 50%;
+    padding-left: 2.5rem;
+    padding-right: 5rem;
+    border: 1px solid var(--desaturatedRed);
+    background-image: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(0, 100%, 98%));
+  }
+
+  [name=email]:not(:focus):invalid {
+    transition: background 0.5s ease;
+    border: 2px solid red;
+    background-image: url(images/icon-error.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-origin: content-box;
+  }
+
+  [type=submit] {
+    position: relative;
+    right: 4rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    border: 1px solid transparent;
+    color: white;
+    box-shadow: 0px 20px 15px -10px hsl(0, 80%, 86%);
+    background-image: linear-gradient(135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+  }
+
+  [type=submit]:hover {
+    cursor: pointer;
+  }
+
+  /* ---- Footer ---- */
+
+  .attribution { font-size: 11px; margin-top: 5rem; }
+  .attribution a { color: hsl(228, 45%, 44%); }
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <aside>
+      <img src="images/logo.svg" class="logo">
+      <img src="images/hero-mobile.jpg" class="hero-mobile">
+      <h1 class="title">
+        <span>We're</span>
+        <br />coming
+        <br />soon
+      </h1>
+      <br />
+      <h2 class="subtitle">
+        Hello fellow shoppers! We're currently building our new fashion store.
+        Add your email below to stay up-to-date with announcements and our launch deals.
+      </h2>
+
+      <form name="contact" method="" action"">
+        <input type="email" name="email" placeholder="Email Address">
+        <button type="submit">&#10095;</button>
+      </form>
+
+      <footer>
+        <p class="attribution">
+          Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+          Coded by <a href="#">Your Name Here</a>.
+        </p>
+      </footer>
+    </aside>
+
+    <img class="hero-big" src="images/hero-desktop.jpg">
+  </main>
+
+  <script type="text/javascript">
+  //toggle email error message
+  const contactForm  = document.querySelector('[name = contact]');
+  const contactInput = document.querySelector('[name = email]');
+
+  contactInput.addEventListener('focusout', () =>
+    (!contactInput.checkValidity()) ? contactForm.classList.add("invalid") : ''
+  );
+
+  contactInput.addEventListener('focus', () => contactForm.classList.remove("invalid"));
+
+  </script>
+</body>
+
+</html>
